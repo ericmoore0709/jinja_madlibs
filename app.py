@@ -11,5 +11,4 @@ def displayForm():
 def processForm():
     answers = request.form
     result = story.generate(answers)
-    print(result)
     return render_template('result.html', result=result)

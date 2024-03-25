@@ -1,0 +1,9 @@
+{% extends '/layout/base.html' %}
+{% block content %}
+
+{% if stories %}
+{% for story in stories %}
+{{story}}
+{% endfor %}
+{% endif %}
+{% endblock %}

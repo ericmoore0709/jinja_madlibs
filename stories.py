@@ -43,3 +43,20 @@ story = Story(
     """Once upon a time in a long-ago {place}, there lived a
        large {adjective} {noun}. It loved to {verb} {plural_noun}."""
 )
+
+
+class StoryList:
+    def __init__(self, stories=[]):
+        self.stories = stories
+
+    def stories(self):
+        return self.stories
+
+    def addStory(self, story):
+        try:
+            story = Story(story)
+            self.stories = [*self.stories, story]
+        except Exception as ex:
+            print(ex)
+
+        return story

@@ -20,6 +20,35 @@
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
         integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
 
+    <!-- JS for new madlib input generator -->
+    <script>
+        $('#add_prompt').click((e) => {
+            e.preventDefault();
+
+            const inputId = $('#input_list').children.length
+
+            $input = $('<input />')
+                .attr('type', 'text')
+                .attr('placeholder', 'Part of Speech')
+                .addClass('form-control')
+                .attr('name', 'prompt' + inputId)
+
+            $delBtn = $('<button>')
+                .addClass('btn btn-danger-subtle text-white')
+                .text("X")
+                .click((e) => {
+                    e.preventDefault();
+                    $div = $(e.target).closest('div');
+                    $div.remove()
+                })
+
+            $inDiv = $('<div>')
+                .addClass('container d-flex')
+                .append($input)
+                .append($delBtn)
+            $('#input_list').append($inDiv);
+        })
+    </script>
 </body>
 
 </html>

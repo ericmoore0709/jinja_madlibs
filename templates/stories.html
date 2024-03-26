@@ -2,10 +2,10 @@
 {% block content %}
 
 {% if stories %}
-<div class="container">
+<div class="container d-flex">
     {% for story in stories.getStories() %}
 
-    <div class="card m-2" style="width: 18rem;">
+    <div class="card m-2" style="width: 18rem; height:fit-content;">
         <div class="card-header bg-danger text-white">
             <h3>{{ story.prompts|length}} prompts</h3>
         </div>

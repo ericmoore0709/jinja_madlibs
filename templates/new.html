@@ -1,0 +1,16 @@
+{% extends 'layout/base.html'%}
+{% block content %}
+{% if error %}<span class="bg-danger text-white">{{error}}</span>{% endif %}
+<div class="container w-50 mx-auto my-5 bg-danger text-white py-5">
+    <h1 class="w-50 m-auto text-center">New Madlib</h1>
+    <form action="/new" method="post" class="form d-flex flex-column w-75 m-auto py-3">
+        <div id="input_list">
+            <input class="form-control" type="text" placeholder="Part of Speech" name="prompt1" />
+        </div>
+        <button class="btn btn-link" id="add_prompt">Add prompt...</button>
+        <textarea class="form-control" placeholder="The story, where each prompt is surrounded with `{` and `}`."
+            name="template"></textarea>
+        <input class="form-control btn btn-dark my-1" type="submit" value="Submit" />
+    </form>
+</div>
+{% endblock %}

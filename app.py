@@ -1,11 +1,11 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from stories import Story, story, StoryList, storyList
 
 app = Flask(__name__)
 
 
 @app.route('/<id>', methods=['GET', 'POST'])
-def displayFillForm(id: str):
+def id(id: str):
 
     if request.method == 'POST':
         answers = request.form
@@ -21,9 +21,22 @@ def displayFillForm(id: str):
 def new():
     if request.method == 'POST':
         # process new story
-        return render_template('stories.html', stories=storyList)
+        form = request.form
+
+        # parse prompts from form
+        prompts = [pos for prompt, pos in form.items() if 'prompt' in prompt]
+
+        template = form['template']
+
+        try:
+            story = Story(prompts, template)
+            storyList.addStory(story)
+            return redirect('/')
+        except Exception as ex:
+            print(ex)
+            return render_template('new.html', story=Story(), title="New", error="There was an error parsing your madlib story.")
     else:
-        return render_template('new.html', story=Story(""), title="New")
+        return render_template('new.html', story=Story(), title="New")
 
 
 @app.route('/')

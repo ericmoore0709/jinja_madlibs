@@ -1,3 +1,5 @@
+import uuid
+
 """Madlibs Stories."""
 
 
@@ -18,11 +20,14 @@ class Story:
         'I love to eat a good mango.'
     """
 
-    def __init__(self, words, text):
+    def __init__(self, words=[], text=""):
         """Create story with words and template text."""
-
+        self.id = uuid.uuid4()
         self.prompts = words
         self.template = text
+
+    def getId(self) -> str:
+        return str(self.id)
 
     def generate(self, answers):
         """Substitute answers into text."""
@@ -33,6 +38,10 @@ class Story:
             text = text.replace("{" + key + "}", val)
 
         return text
+
+    def __repr__(self) -> str:
+        """String representation of the story."""
+        return str.format("Story({}, {})", self.prompts, self.template)
 
 
 # Here's a story to get you started
@@ -46,17 +55,33 @@ story = Story(
 
 
 class StoryList:
-    def __init__(self, stories=[]):
-        self.stories = stories
+    "An encapsulated Story list."
 
-    def stories(self):
-        return self.stories
+    def __init__(self, stories: list[Story] = []):
+        "Creates an instance of the story list."
+        self.storiesList = stories
+
+    def getStories(self):
+        "Returns all stories in the story list."
+        return self.storiesList
 
     def addStory(self, story):
+        "Attempts to add story to the story list."
         try:
-            story = Story(story)
-            self.stories = [*self.stories, story]
+            if not isinstance(story, Story):
+                story = Story(story)
+            self.storiesList = [*self.storiesList, story]
         except Exception as ex:
             print(ex)
 
         return story
+
+    def find(self, id: str) -> Story:
+        "Finds the story with the given ID string."
+        for story in self.storiesList:
+            if story.getId() == id:
+                return story
+
+
+storyList = StoryList()
+storyList.addStory(story)

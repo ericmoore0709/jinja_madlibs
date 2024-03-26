@@ -7,6 +7,7 @@
         <input class="form-control my-1" type="text" name={{prompt}} placeholder="{{prompt|capitalize|replace('_', ' '
             )}}" />
         {% endfor %}
+        <input type="hidden" value={{story.getId()}} name="id" />
         <input class="form-control btn btn-dark my-1" type="submit" value="Go!" />
     </form>
 </div>

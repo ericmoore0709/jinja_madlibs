@@ -3,6 +3,6 @@
 <div class="container w-50 mx-auto my-5 bg-danger py-3">
     <h1 class="w-50 m-auto text-center text-white">Madlib Result</h1>
     <p class="text-center bg-danger-subtle py-3 px-3 my-3 w-75 m-auto">{{result}}</p>
-    <a class="text-white" href="/">Do it again.</a>
+    <a class="text-white" href={{'/' + story.getId()}}>Do it again.</a>
 </div>
 {% endblock %}

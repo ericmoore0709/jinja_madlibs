@@ -1,0 +1,29 @@
+{% extends '/layout/base.html' %}
+{% block content %}
+
+{% if stories %}
+<div class="container d-flex">
+    {% for story in stories.getStories() %}
+
+    <div class="card m-2" style="width: 18rem; height:fit-content;">
+        <div class="card-header bg-danger text-white">
+            <h3>{{ story.prompts|length}} prompts</h3>
+        </div>
+        <div class="card-content">
+            <ul class="list-group list-group-flush">
+                {% for prompt in story.prompts%}
+                <li class="list-group-item">{{prompt|capitalize|replace('_', ' ')}}</li>
+                {%endfor%}
+            </ul>
+        </div>
+        <div class="card-footer">
+            <a href={{'/' + story.getId()}} class="btn btn-danger">Pick me!</a>
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<h2>No stories yet.</h2>
+{% endif %}
+{% endblock %}
